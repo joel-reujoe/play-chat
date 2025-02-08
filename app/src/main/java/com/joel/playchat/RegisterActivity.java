@@ -1,4 +1,4 @@
-package flexenv.solutions.cloud.google.com.playchat;
+package com.joel.playchat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import flexenv.solutions.cloud.google.com.playchat.User;
 
 public class RegisterActivity extends AppCompatActivity {
 

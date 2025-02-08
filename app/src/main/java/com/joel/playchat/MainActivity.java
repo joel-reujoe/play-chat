@@ -1,4 +1,4 @@
-package flexenv.solutions.cloud.google.com.playchat;
+package com.joel.playchat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.joel.playchat.R;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth Auth;

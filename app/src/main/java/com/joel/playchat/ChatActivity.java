@@ -1,4 +1,4 @@
-package flexenv.solutions.cloud.google.com.playchat;
+package com.joel.playchat;
 
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.joel.playchat.ChatListAdapter;
+
+import flexenv.solutions.cloud.google.com.playchat.InstantMessage;
 
 public class ChatActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;

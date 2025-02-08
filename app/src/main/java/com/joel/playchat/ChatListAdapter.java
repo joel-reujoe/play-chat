@@ -1,7 +1,9 @@
-package flexenv.solutions.cloud.google.com.playchat;
+package com.joel.playchat;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,19 +18,22 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
+import flexenv.solutions.cloud.google.com.playchat.InstantMessage;
 
+/**
+ * Created by JOEL on 09/02/2018.
+ */
 
-public class UserListAdapter extends BaseAdapter {
+public class ChatListAdapter extends BaseAdapter
+{
     private Activity mactivity;
     private DatabaseReference mdatabaseReference;
+    private  String mdisplayName;
     private ArrayList<DataSnapshot> snapshots;
-    private String mdisplayName;
     private ChildEventListener childEventListener=new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-           if(!mdisplayName.equals(dataSnapshot.toString())) {
-               snapshots.add(dataSnapshot);
-           }
+            snapshots.add(dataSnapshot);
             notifyDataSetChanged();
         }
 
@@ -52,19 +57,18 @@ public class UserListAdapter extends BaseAdapter {
 
         }
     };
-    public UserListAdapter(Activity activity, DatabaseReference databaseReference,String displayName)
+    public ChatListAdapter(Activity activity,DatabaseReference databaseReference,String displayName)
     {
         mactivity=activity;
-        mdatabaseReference=databaseReference.child("user");
+        mdatabaseReference=databaseReference.child("messages");
         mdisplayName=displayName;
         mdatabaseReference.addChildEventListener(childEventListener);
         snapshots=new ArrayList<>();
 
     }
-
     static class ViewHolder{
-
         TextView authorname;
+        TextView body;
         LinearLayout.LayoutParams params;
     }
 
@@ -74,9 +78,9 @@ public class UserListAdapter extends BaseAdapter {
     }
 
     @Override
-    public User getItem(int i) {
+    public InstantMessage getItem(int i) {
         DataSnapshot snapshot1=snapshots.get(i);
-        return snapshot1.getValue(User.class);
+        return snapshot1.getValue(InstantMessage.class);
     }
 
     @Override
@@ -90,17 +94,40 @@ public class UserListAdapter extends BaseAdapter {
         {
             LayoutInflater inflater=(LayoutInflater)mactivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view=inflater.inflate(R.layout.chat_msg_row,viewGroup,false);
-            final UserListAdapter.ViewHolder holder=new UserListAdapter.ViewHolder();
+            final ViewHolder holder=new ViewHolder();
             holder.authorname=(TextView)view.findViewById(R.id.author);
+            holder.body=(TextView)view.findViewById(R.id.imessage);
             holder.params=(LinearLayout.LayoutParams)holder.authorname.getLayoutParams();
             view.setTag(holder);
         }
-        final User user=getItem(i);
-        final UserListAdapter.ViewHolder holder=(UserListAdapter.ViewHolder)view.getTag();
-        String author=user.getAuthor();
+        final InstantMessage message=getItem(i);
+        final ViewHolder holder=(ViewHolder)view.getTag();
+        boolean isMe=message.getAuthor().equals(mdisplayName);
+        setChatRowAppearance(isMe,holder);
+        String author=message.getAuthor();
         holder.authorname.setText(author);
+        String messagetext=message.getMessage();
+        holder.body.setText(messagetext);
         return view;
     }
+    public  void setChatRowAppearance(boolean isItMe,ViewHolder holder)
+    {
+        if(isItMe)
+        {
+            holder.params.gravity= Gravity.END;
+            holder.authorname.setTextColor(Color.GREEN);
+            holder.body.setBackgroundResource(R.drawable.bubble2);
+        }
+        else
+        {
+            holder.params.gravity= Gravity.START;
+            holder.authorname.setTextColor(Color.BLUE);
+            holder.body.setBackgroundResource(R.drawable.bubble1);
+        }
+        holder.authorname.setLayoutParams(holder.params);
+        holder.body.setLayoutParams(holder.params);
+    }
+
     public void cleanUp()
     {
         mdatabaseReference.removeEventListener(childEventListener);

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Playchat2.iml" filepath="$PROJECT_DIR$/Playchat2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play-chat.iml" filepath="$PROJECT_DIR$/.idea/modules/play-chat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/play-chat.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/play-chat.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/play-chat.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/play-chat.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/play-chat.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/play-chat.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/play-chat.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/play-chat.app.unitTest.iml" />
     </modules>
   </component>
 </project>
